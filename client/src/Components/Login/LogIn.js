@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import { Grid, InputAdornment, Link, TextField } from "@material-ui/core";
 import { AccountCircle, LockRounded } from "@material-ui/icons";
+import axios from "axios";
 
-const LogIn = ({ handleLog }) => {
+const LogIn = ({ handleLog}) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/user/login`,
+      withCredentials: true,
+      data: {
+        email,
+        password,
+      },
+    }).then((res) => {
+      if (res.data.errors) {
+        console.log(res.data.errors);
+      } else {
+        console.log(res);
+        window.location = "/";
+      }
+    }).catch((err) => console.log(err));
+  };
   return (
     <Grid container direction="column">
-      <form action="">
+      <form onSubmit={handleLogin}>
         <Grid
           container
           item
@@ -20,6 +43,8 @@ const LogIn = ({ handleLog }) => {
             <TextField
               label="Email"
               type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
               color="secondary"
               margin="normal"
               InputProps={{
@@ -34,6 +59,8 @@ const LogIn = ({ handleLog }) => {
               label="Password"
               color="secondary"
               type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
               margin="normal"
               InputProps={{
                 startAdornment: (
@@ -53,7 +80,13 @@ const LogIn = ({ handleLog }) => {
             >
               Se Connecter
             </Button>
-          <Link color="secondary" style={{cursor: "pointer",marginTop: 30, fontWeight: 600}} onClick={(e) => handleLog("register")}>S'inscrire ?</Link>
+            <Link
+              color="secondary"
+              style={{ cursor: "pointer", marginTop: 30, fontWeight: 600 }}
+              onClick={(e) => handleLog("register")}
+            >
+              S'inscrire ?
+            </Link>
           </div>
         </Grid>
       </form>

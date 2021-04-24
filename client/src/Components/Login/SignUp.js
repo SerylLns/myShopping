@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import { Grid, InputAdornment, Link, TextField } from "@material-ui/core";
 import { AccountCircle, LockRounded, AlternateEmail } from "@material-ui/icons";
+import axios from "axios";
 
 const SignUp = ({ handleLog }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [pseudo, setPseudo] = useState("");
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    await axios({
+      method: "POST",
+      url: `${process.env.REACT_APP_API_URL}api/user/register`,
+      data: {
+        pseudo,
+        email,
+        password,
+      },
+    })
+      .then((res) => {
+        if (res.data.errors) {
+          console.log(res.data.errors);
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <Grid container direction="column">
-      <form action="">
+      <form onSubmit={handleRegister}>
         <Grid
           container
           item
@@ -20,6 +46,8 @@ const SignUp = ({ handleLog }) => {
             <TextField
               label="Pseudo"
               type="text"
+              onChange={(e) => setPseudo(e.target.value)}
+              value={pseudo}
               color="secondary"
               margin="normal"
               InputProps={{
@@ -33,6 +61,8 @@ const SignUp = ({ handleLog }) => {
             <TextField
               label="Email"
               type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
               color="secondary"
               margin="normal"
               InputProps={{
@@ -47,6 +77,8 @@ const SignUp = ({ handleLog }) => {
               label="Password"
               color="secondary"
               type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
               margin="normal"
               InputProps={{
                 startAdornment: (

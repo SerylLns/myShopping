@@ -1,1 +1,21 @@
 @import './login.scss';
+
+.log-background{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba($color: grey, $alpha: .4);
+}
+.log-container{
+  position: relative;
+  margin-top: 15vh;
+}
+.close-form{
+  position: absolute;
+  cursor: pointer;
+  top: 10px;
+  right: 10px;
+  font-size: 22px;
+}
