@@ -1,8 +1,6 @@
-import { Button } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import LogIn from "../Components/Login/LogIn";
 import SignUp from "../Components/Login/SignUp";
-import CloseIcon from "@material-ui/icons/Close";
 
 const Log = () => {
   const [signUp, setSignUp] = useState(true);

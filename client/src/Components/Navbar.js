@@ -33,7 +33,7 @@ const Navbar = () => {
   const open = Boolean(anchorEl);
   const uid = useContext(UidContext);
   const [openLog, setOpenLog] = useState(false);
-  const userData = useSelector((state) => state.usersReducer)
+  const userData = useSelector((state) => state.userReducer)
 
   
 
@@ -74,7 +74,7 @@ const Navbar = () => {
             </Typography>
             {uid && (
               <Typography variant="h6" className={classes.title}>
-                My Shop
+                Bienvenue {userData.pseudo} !!
               </Typography>
             )}
             {auth && (

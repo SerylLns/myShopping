@@ -5,7 +5,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import theme from './theme';
 import Navbar from "./Components/Navbar";
 import { useDispatch } from "react-redux";
-import { getUser } from "./actions/users.action";
+import { getUser } from "./actions/user.action";
 
 const { UidContext } = require("./UserContext");
 
