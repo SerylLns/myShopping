@@ -43,6 +43,7 @@ module.exports.createArticle = async (req, res) => {
     const article = await newArticle.save();
     return res.status(200).json(article);
   } catch (error) {
+    console.log(error);
     res.status(400).json({ err: error });
   }
 };

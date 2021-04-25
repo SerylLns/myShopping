@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       max: 1024,
       minlength: 6,
+    },
+    admin: {
+      type: Boolean,
+      default: false
     }
   },
   {

@@ -12,6 +12,7 @@ import Log from "../containers/Log";
 import axios from "axios";
 import cookie from "js-cookie";
 import { useSelector } from "react-redux";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -61,7 +62,7 @@ const Navbar = () => {
   return (
     <>
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" color="secondary">
           <Toolbar>
             <IconButton
               edge="start"
@@ -73,10 +74,30 @@ const Navbar = () => {
               My Shop
             </Typography>
             {uid && (
-              <Typography variant="h6" className={classes.title}>
+              <Typography
+                color="primary"
+                variant="h5"
+                style={{
+                  fontFamily: "'Architects Daughter', cursive",
+                  fontWeight: 600,
+                }}
+                className={classes.title}
+              >
                 Bienvenue {userData.pseudo} !!
               </Typography>
             )}
+
+            <div style={{ marginRight: "10px" }}>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <ShoppingCartIcon color="primary" />
+              </IconButton>
+            </div>
             {auth && (
               <div>
                 <IconButton

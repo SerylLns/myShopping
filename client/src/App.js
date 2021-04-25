@@ -6,6 +6,7 @@ import theme from './theme';
 import Navbar from "./Components/Navbar";
 import { useDispatch } from "react-redux";
 import { getUser } from "./actions/user.action";
+import AdminPage from "./containers/AdminPage";
 
 const { UidContext } = require("./UserContext");
 
@@ -34,8 +35,9 @@ function App() {
     <div className="App">
       <UidContext.Provider value={uid}>
         <ThemeProvider theme={theme}>
-          <Navbar/>
-          <Cards />
+          <Navbar />
+          <AdminPage/>
+          {/* <Cards /> */}
           {/* <Log/> */}
         </ThemeProvider>
       </UidContext.Provider>
