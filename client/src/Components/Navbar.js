@@ -13,6 +13,7 @@ import axios from "axios";
 import cookie from "js-cookie";
 import { useSelector } from "react-redux";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import AdminPage from "../containers/AdminPage";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,8 +35,8 @@ const Navbar = () => {
   const open = Boolean(anchorEl);
   const uid = useContext(UidContext);
   const [openLog, setOpenLog] = useState(false);
-  const userData = useSelector((state) => state.userReducer)
-
+  const userData = useSelector((state) => state.userReducer);
+  const [adminPage, setAdminPage] = useState(false);
   
 
   const handleMenu = (event) => {
@@ -86,6 +87,7 @@ const Navbar = () => {
                 Bienvenue {userData.pseudo} !!
               </Typography>
             )}
+
 
             <div style={{ marginRight: "10px" }}>
               <IconButton
@@ -138,6 +140,7 @@ const Navbar = () => {
         </AppBar>
       </div>
       {openLog && <Log />}
+      {adminPage && <AdminPage/>}
     </>
   );
 };

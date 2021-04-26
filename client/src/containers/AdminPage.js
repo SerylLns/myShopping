@@ -3,6 +3,9 @@ import {
   FormControl,
   Input,
   InputAdornment,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
 } from "@material-ui/core";
 import React, { useContext, useState } from "react";
@@ -14,9 +17,22 @@ const AdminPage = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
-  // const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState();
   const Uid = useContext(UidContext)
+   const [category, setCategory] = React.useState("");
+   const [open, setOpen] = React.useState(false);
+
+   const handleChange = (event) => {
+     setCategory(event.target.value);
+   };
+
+   const handleClose = () => {
+     setOpen(false);
+   };
+
+   const handleOpen = () => {
+     setOpen(true);
+   };
 
   const resetInput = () => {
     setTitle("");
@@ -34,6 +50,7 @@ const AdminPage = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log("coucou");
     e.preventDefault();
     if (!previewSource) return;
     uploadImg(previewSource)
@@ -50,10 +67,14 @@ const AdminPage = () => {
           price: price,
           file: base64EncodedImg,
           posterId: Uid,
-          category: "Salut"
+          category: category
         },
       })
         .then((res) => {
+          if(res.errors) console.log(res.errors);
+          // else {
+
+          // }
           resetInput();
         })
         .catch((err) => console.log(err));
@@ -80,25 +101,40 @@ const AdminPage = () => {
               onChange={(e) => setPrice(e.target.value)}
               value={price}
               endAdornment={<InputAdornment position="end">€</InputAdornment>}
-              // aria-describedby="standard-weight-helper-text"
               label="Prix de l'article"
               inputProps={{
                 "aria-label": "weight",
               }}
             />
           </FormControl>
+          <div>
+            <FormControl >
+              <InputLabel id="demo-controlled-open-select-label">
+                Catégory
+              </InputLabel>
+              <Select
+                // labelId="demo-controlled-open-select-label"
+                // id="demo-controlled-open-select"
+
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                value={category}
+                onChange={handleChange}
+              >
+                <MenuItem value={"voyage"}>Voyage</MenuItem>
+                <MenuItem value={"Luxe"}>Luxe</MenuItem>
+                <MenuItem value={"high-tech"}>High-Tech</MenuItem>
+                <MenuItem value={"sport"}>Sport</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
         </div>
         <div className="img-upload">
-          <Button
-            variant="contained"
-            color="default"
-            // className={classes.button}
-            startIcon={<ImageIcon />}
-          >
+          <Button variant="contained" color="default" startIcon={<ImageIcon />}>
             Image
             <input
               type="file"
-              // value={fileInputState}
               onChange={(e) => previewFile(e.target.files[0])}
             />
           </Button>
