@@ -1,0 +1,43 @@
+.show-container{
+  width: 100vw;
+  
+}
+
+.left-part-show{
+  position: relative;
+  width: 60%;
+  border: 1px solid red;
+  h2{
+    text-align: center;
+    font-size: 32px;
+  }
+  img{
+    width: 100%;
+  }
+  .price-article{
+    position: absolute;
+
+    top: 30%;
+    right: 20px;
+    color: white;
+    font-size: 38px;
+    background-color: rgba($color: grey, $alpha: .7);
+    padding: 10px 25px;
+    border-radius: 16px;
+    // mix-blend-mode: hue;
+    border-top-left-radius: 55%;
+    border-bottom-left-radius: 55%;
+  }
+}
+
+.show-card-content{
+  width: 70%;
+  border: 1px solid red;
+  margin: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .left-part-show{
+    width: 100%;
+  }
+}

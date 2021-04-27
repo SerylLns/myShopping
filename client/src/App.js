@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./actions/user.action";
 import AdminPage from "./containers/AdminPage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import ShowArticle from "./containers/ShowArticle";
 
 const { UidContext } = require("./UserContext");
 
@@ -15,7 +16,6 @@ function App() {
   const [uid, setUid] = useState(null);
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userReducer);
-  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const feetchToken = async () => {
@@ -45,8 +45,8 @@ function App() {
             <Route exact path="/" component={Cards} />
             {userData.admin && (
               <Route exact path="/admin" component={AdminPage} />
-            
-              )}
+            )}
+            <Route path="/:id" component={ShowArticle} />
             {/* <Cards /> */}
             {/* <Log/> */}
           </ThemeProvider>

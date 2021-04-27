@@ -8,13 +8,12 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { UidContext } from "../UserContext";
-import Log from "../containers/Log";
 import axios from "axios";
 import cookie from "js-cookie";
 import { useSelector } from "react-redux";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AdminPage from "../containers/AdminPage";
-
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +36,6 @@ const Navbar = () => {
   const [openLog, setOpenLog] = useState(false);
   const userData = useSelector((state) => state.userReducer);
   const [adminPage, setAdminPage] = useState(false);
-  
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -52,11 +50,13 @@ const Navbar = () => {
       method: "GET",
       url: `${process.env.REACT_APP_API_URL}api/user/logout`,
       withCredentials: true,
-    }).then(() => {
+    })
+      .then(() => {
         if (window !== "undefined") {
           cookie.remove("jwt", { expires: 1 });
         }
-    }).catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
     window.location = "/";
   };
 
@@ -72,7 +72,7 @@ const Navbar = () => {
               aria-label="menu"
             ></IconButton>
             <Typography variant="h6" className={classes.title}>
-              My Shop
+              <NavLink to="/">My Shop</NavLink>
             </Typography>
             {uid && (
               <Typography
@@ -87,7 +87,6 @@ const Navbar = () => {
                 Bienvenue {userData.pseudo} !!
               </Typography>
             )}
-
 
             <div style={{ marginRight: "10px" }}>
               <IconButton
@@ -116,12 +115,12 @@ const Navbar = () => {
                   anchorEl={anchorEl}
                   anchorOrigin={{
                     vertical: "top",
-                    horizontal: "right",
+                    horizontal: "left",
                   }}
                   keepMounted
                   transformOrigin={{
                     vertical: "top",
-                    horizontal: "right",
+                    horizontal: "left",
                   }}
                   open={open}
                   onClose={handleClose}
@@ -139,8 +138,8 @@ const Navbar = () => {
           </Toolbar>
         </AppBar>
       </div>
-      {openLog && <Log />}
-      {adminPage && <AdminPage/>}
+      {/* {openLog && <Log />} */}
+      {adminPage && <AdminPage />}
     </>
   );
 };

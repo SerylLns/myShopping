@@ -12,15 +12,15 @@ const Cards = () => {
     dispatch(getArticles(10));
   },[dispatch])
   return (
-    <>
-      <Grid container direction="row" style={{marginTop: "20px"}}  wrap="wrap" justify="space-around" >
+    <div className="cards-container">
+      <Grid container direction="row" style={{marginTop: "20px"}}   justify="center" >
         {!isEmpty(articles[0]) && articles.map((article) => {
           return (
               < CardArticle key={article._id} article={article}/>
           );
         })}
       </Grid>
-    </>
+    </div>
   );
 };
 
