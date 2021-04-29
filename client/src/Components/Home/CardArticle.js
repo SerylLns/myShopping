@@ -9,6 +9,8 @@ import { Paper } from '@material-ui/core';
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Star, StarOutline } from "@material-ui/icons";
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { showArticle } from '../../actions/showArticle.action';
 const useStyles = makeStyles({
   root: {
     maxWidth: 250,

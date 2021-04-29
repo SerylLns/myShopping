@@ -1,52 +1,72 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showArticle } from "../actions/showArticle.action";
+import AddComment from "../Components/Article/AddComment";
 import ArticleComment from "../Components/Article/ArticleComment";
+import { UidContext } from "../UserContext";
 import { isEmpty } from "../utils/utils";
 
 const ShowArticle = ({ match }) => {
-  console.log(match.params.id);
   const [article, setArticle] = useState({});
+  const Articles = useSelector((state) => state.articlesReducer);
   const UsersData = useSelector((state) => state.usersReducer);
-
-  useState(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}api/articles/${match.params.id}`)
+  const uid = useContext(UidContext);
+  const dispatch = useDispatch();
+  const [isLoading, setisLoading] = useState(true);
+  const getArticle = async (id) => {
+    await axios
+      .get(`${process.env.REACT_APP_API_URL}api/articles/${id}`)
       .then((res) => {
         setArticle(res.data);
-        console.log(res.data);
+        dispatch(showArticle(res.data));
+        setisLoading(false);
       })
       .catch((err) => console.log(err));
-  }, []);
+  };
+  getArticle(match.params.id);
+  // useState(() => {
+  //   console.log('articles:' + Articles[0]);
+  //   if (!isEmpty(Articles)) {
+  //     Articles.forEach(article => {
+  //       if (article._id === match.params.id) {
+  //         setArticle(article);
+  //         setisLoading(false);
+  //       }
+  //     });
+  //   }
+  // }, [Articles]);
 
   return (
     <>
-      {!isEmpty(article) && (
+      {isLoading ? (
+        <h1>Loading.......</h1>
+      ) : (
         <div className="show-container">
           <div className="left-part-show">
-            <img src={article.pictureUrl} alt="" />
-            <h2> {article.title}</h2>
-            <h4 className="price-article">{article.price} €</h4>
             <div className="show-card-content">
+              <img src={article.pictureUrl} alt="" />
+              <h2> {article.title}</h2>
+              <h4 className="price-article">{article.price} €</h4>
               <p>{article.description}</p>
-            </div>
-            <div className="show-card-footer">
-              <small>{article.createdAt}</small>
-              {UsersData.map((user) => {
-                if (user._id === article.posterId) {
-                  return <p key={user._id}>{user.pseudo}</p>;
-                } else {
-                  return null;
-                }
-              })}
+              <div className="show-card-footer">
+                <p> Créer le: {article.createdAt}</p>
+                {UsersData.map((user) => {
+                  if (user._id === article.posterId) {
+                    return <p key={user._id}> Vendeur: {user.pseudo}</p>;
+                  } else {
+                    return null;
+                  }
+                })}
+              </div>
             </div>
             <div className="show-comments">
               <h3>Commentaires </h3>
-              {!isEmpty(article.comments[0]) && (
-                  article.comments.map((comment) => {
-                    return <ArticleComment comment={comment} />
-                  })
-              )}
+              {!isEmpty(article.comments) &&
+                article.comments.map((comment) => {
+                  return <ArticleComment comment={comment} />;
+                })}
+              {uid && <AddComment getArticle={getArticle} article={article} />}
             </div>
           </div>
         </div>

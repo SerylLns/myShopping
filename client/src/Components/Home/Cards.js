@@ -7,7 +7,7 @@ import CardArticle from './CardArticle';
 
 const Cards = () => {
   const dispatch = useDispatch();
-  const articles = useSelector((state) => state.articlesReducer);
+  const articles = useSelector((state) => state.articlesReducer);         
   useEffect(() => {
     dispatch(getArticles(10));
   },[dispatch])

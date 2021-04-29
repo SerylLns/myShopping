@@ -1,12 +1,13 @@
+@import './comment.scss';
+
 .show-container{
   width: 100vw;
-  
 }
 
 .left-part-show{
   position: relative;
+  margin: 25px;
   width: 60%;
-  border: 1px solid red;
   h2{
     text-align: center;
     font-size: 32px;
@@ -16,28 +17,43 @@
   }
   .price-article{
     position: absolute;
-
-    top: 30%;
-    right: 20px;
-    color: white;
+    bottom: 0%;
+    right: 0px;
     font-size: 38px;
-    background-color: rgba($color: grey, $alpha: .7);
+    background-color: rgba($color: grey, $alpha: .8);
     padding: 10px 25px;
-    border-radius: 16px;
-    // mix-blend-mode: hue;
-    border-top-left-radius: 55%;
-    border-bottom-left-radius: 55%;
+    border-top-left-radius: 16px;
   }
 }
 
 .show-card-content{
-  width: 70%;
-  border: 1px solid red;
+  width: 100%;
+  position: relative;
   margin: auto;
+  padding-bottom: 20px;
+  background-color: rgba($color: #bbbb, $alpha: .5);
+  p{
+    margin: 15px;
+  }
+}
+.show-card-footer{
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  font-style: italic;
+  font-weight: 600;
+  font-size: .7em;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 @media screen and (max-width: 600px) {
   .left-part-show{
     width: 100%;
+  }
+  .show-card-footer{
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

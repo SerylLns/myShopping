@@ -9,6 +9,7 @@ import { getUser } from "./actions/user.action";
 import AdminPage from "./containers/AdminPage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ShowArticle from "./containers/ShowArticle";
+import { getArticles } from "./actions/articles.action";
 
 const { UidContext } = require("./UserContext");
 
@@ -16,7 +17,6 @@ function App() {
   const [uid, setUid] = useState(null);
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userReducer);
-
   useEffect(() => {
     const feetchToken = async () => {
       axios({

@@ -8,8 +8,10 @@ import thunk from "redux-thunk";
 import logger from "redux-logger"
 import { getAllUsers } from './actions/users.action';
 import './styles/index.scss';
+import { getArticles } from './actions/articles.action';
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 store.dispatch(getAllUsers());
+store.dispatch(getArticles());
 
 ReactDOM.render(
     <Provider store={store}>

@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AdminPage from "../containers/AdminPage";
 import { NavLink } from "react-router-dom";
-
+import Log from '../containers/Log';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -138,7 +138,7 @@ const Navbar = () => {
           </Toolbar>
         </AppBar>
       </div>
-      {/* {openLog && <Log />} */}
+      {openLog && <Log />}
       {adminPage && <AdminPage />}
     </>
   );
