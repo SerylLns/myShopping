@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import { Grid, InputAdornment, Link, TextField } from "@material-ui/core";
-import { AccountCircle, LockRounded, AlternateEmail } from "@material-ui/icons";
+import {
+  AccountCircle,
+  LockRounded,
+  AlternateEmail,
+  CloseRounded,
+} from "@material-ui/icons";
 import axios from "axios";
 
-const SignUp = ({ handleLog }) => {
+const SignUp = ({ handleLog, setOpenLog }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [pseudo, setPseudo] = useState("");
@@ -105,6 +110,17 @@ const SignUp = ({ handleLog }) => {
             >
               Deja inscrit ?
             </Link>
+            <CloseRounded
+              onClick={(e) => setOpenLog(false)}
+              color="primary"
+              fontSize="large"
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                cursor: "pointer",
+              }}
+            />
           </div>
         </Grid>
       </form>

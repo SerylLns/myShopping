@@ -1,0 +1,23 @@
+.navbar{
+  width: 100vw;
+  height: 4em;
+  background-color: #f3c053;
+  display: flex;
+  align-items: center;
+  h3{
+    font-size: 1.6em;
+    margin-left: 15px;
+  }
+}
+.navbar-action{
+  display: flex;
+  justify-content: flex-end;
+  width: 80%;
+  .cart-icon{
+    cursor: pointer;
+    margin: 0px 25px;
+  }
+  .account-icon{
+    cursor: pointer;
+  }
+}

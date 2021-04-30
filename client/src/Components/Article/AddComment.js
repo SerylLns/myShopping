@@ -1,10 +1,10 @@
 import { Box, TextField, withStyles } from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
 import React, { useState } from 'react';
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComment } from '../../actions/articles.action';
+import Rating from '@material-ui/lab/Rating';
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const StyledRating = withStyles({
   iconFilled: {

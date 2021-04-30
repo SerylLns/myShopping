@@ -1,11 +1,11 @@
-import React, {  useState } from "react";
+import React, { useEffect, useState } from "react";
 import LogIn from "../Components/Login/LogIn";
 import SignUp from "../Components/Login/SignUp";
 
-const Log = () => {
-  const [signUp, setSignUp] = useState(true);
-  const [signIn, setSignIn] = useState(false);
-  const [openLog, setOpenLog] = useState(true);
+const Log = ({ setOpenLog }) => {
+  const [signUp, setSignUp] = useState(false);
+  const [signIn, setSignIn] = useState(true);
+
   const handleLog = (type) => {
     if (type === "register") {
       setSignIn(false);
@@ -15,20 +15,16 @@ const Log = () => {
       setSignIn(true);
     }
   };
-
+  
   return (
     <>
-      {openLog && (
-        <>
-          <div className="log-background">
-            <div className="log-container">
-              {/* <CloseIcon className="close-form" /> */}
-              {signUp && <SignUp setOpenLog={setOpenLog} handleLog={handleLog} />}
-              {signIn && <LogIn setOpenLog={setOpenLog} handleLog={handleLog} />}
-            </div>
-          </div>
-        </>
-      )}
+      <div className="log-background">
+        <div className="log-container">
+          {/* <CloseIcon className="close-form" /> */}
+          {signUp && <SignUp setOpenLog={setOpenLog} handleLog={handleLog} />}
+          {signIn && <LogIn setOpenLog={setOpenLog} handleLog={handleLog} />}
+        </div>
+      </div>
     </>
   );
 };

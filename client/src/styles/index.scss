@@ -16,6 +16,7 @@ a{
   text-decoration: none;
   color: black;
 }
+@import './navbar.scss';
 @import './log/index.scss';
 @import './card/index.scss';
 @import './adminPage.scss';
