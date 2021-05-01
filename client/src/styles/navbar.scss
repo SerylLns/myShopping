@@ -1,4 +1,7 @@
 .navbar{
+  position: sticky;
+  z-index: 100;
+  top: 0;
   width: 100vw;
   height: 4em;
   background-color: #f3c053;

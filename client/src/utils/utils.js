@@ -17,3 +17,14 @@ export const rateAverage = (comments) => {
   })
   return (sum / comments.length );
 };
+
+export const cartTotal = (items) => {
+  let total = 0;
+  if(isEmpty(items)) return total;
+  else {
+    items.forEach((item) => {
+      total += item.price;
+    });
+    return total;
+  }
+}

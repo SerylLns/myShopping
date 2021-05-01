@@ -11,6 +11,8 @@ import { NavLink } from 'react-router-dom';
 import Rating from "@material-ui/lab/Rating";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { rateAverage } from '../../utils/utils';
+import { useDispatch } from 'react-redux';
+import { addArticle } from '../../actions/cart.action';
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -31,7 +33,11 @@ const useStyles = makeStyles({
 const CardArticle = ({article}) => {
   const { _id, title, pictureUrl, price, comments } = article;
   const classes = useStyles();
-  console.log(comments);
+  const dispatch = useDispatch();
+
+  const handleCart = () => {
+    dispatch(addArticle(article));
+  }
   return (
     <Paper className={classes.root} style={{ margin: "15px 15px" }}>
       <NavLink to={`/${_id}`}>
@@ -74,7 +80,7 @@ const CardArticle = ({article}) => {
           </Button>
         </NavLink>
         <Button size="small" color="primary">
-          <ShoppingCartIcon color="secondary" />
+          <ShoppingCartIcon onClick={() => handleCart()} color="secondary" />
         </Button>
       </div>
     </Paper>

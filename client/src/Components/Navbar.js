@@ -5,15 +5,16 @@ import axios from "axios";
 import cookie from "js-cookie";
 import { useSelector } from "react-redux";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import AdminPage from "../containers/AdminPage";
 import SupervisorAccountRoundedIcon from "@material-ui/icons/SupervisorAccountRounded";
 import Log from "../containers/Log";
 import { NavLink } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Cart from "./Cart/Cart";
 
 const Navbar = () => {
   const uid = useContext(UidContext);
   const [openLog, setOpenLog] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
   const userData = useSelector((state) => state.userReducer);
 
   const handleDisconnect = async () => {
@@ -53,8 +54,13 @@ const Navbar = () => {
               </NavLink>
             </div>
           )}
-          <div className="cart-icon">
-            <ShoppingCartIcon fontSize="large" color="primary" />
+          <div className="cart-icon" style={{ position: "relative" }}>
+            <ShoppingCartIcon
+              onClick={() => setOpenCart(!openCart)}
+              fontSize="large"
+              color="primary"
+            ></ShoppingCartIcon>
+            {openCart && <Cart />}
           </div>
           <div className="account-icon" onClick={() => handleProfile()}>
             {uid ? (
@@ -65,6 +71,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+
       {openLog && <Log setOpenLog={setOpenLog} />}
     </>
   );

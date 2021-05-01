@@ -1,0 +1,26 @@
+.cart-item{
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0px;
+  margin: 10px 0px;
+  flex-wrap: nowrap;
+  border-radius: 6px;
+  box-shadow: 0 1px 6px #fff;
+  .cart-right-part{
+    display: flex;
+  }
+  img{
+    width: 10%;
+    object-fit: cover;
+    margin: 0px 7px;
+    border-radius: 20%;
+  }
+}
+.cart-footer{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
