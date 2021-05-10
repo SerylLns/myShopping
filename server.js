@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 require('dotenv').config({ path: "./.env" });
 const cookieParser = require("cookie-parser");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -45,7 +46,11 @@ app.get("/jwtid", requireAuth, (req, res) => {
 app.use("/api/user", UserRoutes);
 app.use("/api/articles", ArticlesRoutes);
 
+app.use(express.static("client/build"));
 
+app.get("/*", (_, res) => {
+  res.sendFile(path.join(__dirname, "./client/public/index.html"));
+});
 
 // STRIPE
 app.post("/stripe/charge", cors(), async (req, res) => {
