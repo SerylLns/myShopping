@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-require('dotenv').config({ path: "./.env" });
+require('dotenv').config({ path: "./config/.env" });
 const cookieParser = require("cookie-parser");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
