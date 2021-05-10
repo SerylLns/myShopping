@@ -37,3 +37,14 @@ export const addComment = (articleId, commenterId, text, pseudo, rate) => {
       .catch((err) => console.log(err));
   };
 };
+
+// export const processPayment = async (order) => {
+//   const stripePromise = Stripe("pk_test_51ImhnHFidttJ0AsXutTiv1i6oACF0KK0IBOYW7lBYJ9PnmZ5HJamfA6Q2sz5he5Fhwl2pVLYevAHmIqsZt6SArRI00WDx73tfd");
+//   const stripe = await stripePromise;
+//   axios.post('api/create-checkout-session', order)
+//     .then((res) => {
+//       console.log(res);
+//       // return stripe.redirectToCheckout({sessionId: res.id})
+//     })
+//     .catch((err) => console.log(err));
+// }

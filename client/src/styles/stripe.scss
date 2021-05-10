@@ -1,0 +1,11 @@
+.stripe-form{
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  padding: 20px;
+  margin: auto;
+  input{
+    width: 80vw;
+  }
+}

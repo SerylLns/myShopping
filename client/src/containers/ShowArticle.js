@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { showArticle } from "../actions/showArticle.action";
 import AddComment from "../Components/Article/AddComment";
@@ -14,6 +14,7 @@ const ShowArticle = ({ match }) => {
   const uid = useContext(UidContext);
   const dispatch = useDispatch();
   const [isLoading, setisLoading] = useState(true);
+  
   const getArticle = async (id) => {
     await axios
       .get(`${process.env.REACT_APP_API_URL}api/articles/${id}`)
@@ -24,7 +25,10 @@ const ShowArticle = ({ match }) => {
       })
       .catch((err) => console.log(err));
   };
-  getArticle(match.params.id);
+  useEffect(() => {
+    getArticle(match.params.id);
+  }, []);
+
   // useState(() => {
   //   console.log('articles:' + Articles[0]);
   //   if (!isEmpty(Articles)) {

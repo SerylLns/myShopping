@@ -9,7 +9,9 @@ import { getUser } from "./actions/user.action";
 import AdminPage from "./containers/AdminPage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ShowArticle from "./containers/ShowArticle";
-import { getArticles } from "./actions/articles.action";
+import CartPage from "./containers/CartPage";
+import StripeContainer from "./Stripe/StripeContainer";
+
 
 const { UidContext } = require("./UserContext");
 
@@ -17,6 +19,7 @@ function App() {
   const [uid, setUid] = useState(null);
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userReducer);
+
   useEffect(() => {
     const feetchToken = async () => {
       axios({
@@ -46,9 +49,9 @@ function App() {
             {userData.admin && (
               <Route exact path="/admin" component={AdminPage} />
             )}
-            <Route path="/:id" component={ShowArticle} />
-            {/* <Cards /> */}
-            {/* <Log/> */}
+            <Route exact path="/cart" component={CartPage} />
+            <Route path="/article/:id" component={ShowArticle} />
+            <Route path="/payment" component={StripeContainer} />
           </ThemeProvider>
         </UidContext.Provider>
       </Switch>

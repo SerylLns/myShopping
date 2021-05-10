@@ -40,7 +40,7 @@ const CardArticle = ({article}) => {
   }
   return (
     <Paper className={classes.root} style={{ margin: "15px 15px" }}>
-      <NavLink to={`/${_id}`}>
+      <NavLink to={`/article/${_id}`}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -74,7 +74,7 @@ const CardArticle = ({article}) => {
         </CardActionArea>
       </NavLink>
       <div className="bottom-card">
-        <NavLink to={`/${_id}`}>
+        <NavLink to={`/article/${_id}`}>
           <Button size="small" color="primary">
             Voir plus
           </Button>

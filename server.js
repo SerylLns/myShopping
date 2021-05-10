@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 require('dotenv').config({ path: "./.env" });
 const cookieParser = require("cookie-parser");
-// const bodyParser = require('body-parser');
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 require("./db");
 const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 const UserRoutes = require('./route/user.routes');
@@ -44,5 +45,33 @@ app.get("/jwtid", requireAuth, (req, res) => {
 app.use("/api/user", UserRoutes);
 app.use("/api/articles", ArticlesRoutes);
 
+
+
+// STRIPE
+app.post("/stripe/charge", cors(), async (req, res) => {
+  console.log("stripe-routes.js 9 | route reached", req.body);
+  let { amount, id } = req.body;
+  console.log("stripe-routes.js 10 | amount and id", amount, id);
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount: amount,
+      currency: "USD",
+      description: "Ecommerce paid",
+      payment_method: id,
+      confirm: true,
+    });
+    console.log("stripe-routes.js 19 | payment", payment);
+    res.json({
+      message: "Payement effectuer avec succés",
+      success: true,
+    });
+  } catch (error) {
+    console.log("stripe-routes.js 17 | error", error);
+    res.json({
+      message: "Une erreur de payement s'est produite",
+      success: false,
+    });
+  }
+});
 
 app.listen(process.env.PORT, () => console.log(`app listen on port : ${process.env.PORT}`))

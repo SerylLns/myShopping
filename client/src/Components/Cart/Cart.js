@@ -4,6 +4,7 @@ import { cartTotal, isEmpty } from "../../utils/utils";
 import Button from "@material-ui/core/Button";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { deleteArticle } from "../../actions/cart.action";
+import { NavLink } from "react-router-dom";
 
 const Cart = () => {
   const { articles } = useSelector((state) => state.cartReducer);
@@ -34,8 +35,10 @@ const Cart = () => {
       )
       }
       <div className="cart-footer">
-        <h4>Total: {cartTotal(articles)}€ </h4> 
-        <Button variant="contained" color="secondary">Voir le panier</Button>
+        <h4>Total: {cartTotal(articles)}€ </h4>
+        <NavLink exact to="/cart">
+          <Button variant="contained" color="secondary">Voir le panier</Button>
+        </NavLink>
       </div>
     </div>
   );
